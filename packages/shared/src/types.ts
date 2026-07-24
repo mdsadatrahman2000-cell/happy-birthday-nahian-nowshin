@@ -17,6 +17,7 @@ export interface Photo {
   src: string
   alt: string
   caption?: string
+  crop?: 'top' | 'center' | 'bottom'
 }
 
 export interface TimelineEvent {
@@ -33,4 +34,5 @@ export interface GalleryItem {
   alt: string
   caption?: string
   twin?: 'nahian' | 'nowshin' | 'both'
+  crop?: 'top' | 'center' | 'bottom'
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Camera, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import { galleryItems } from '@nahian-birthday/shared'
 
 type FilterType = 'all' | 'nahian' | 'nowshin' | 'both'
@@ -74,16 +74,20 @@ export default function Gallery() {
                 onClick={() => setSelectedPhoto(i)}
                 className="group cursor-pointer"
               >
-                <div className="relative overflow-hidden rounded-2xl aspect-square bg-gradient-to-br from-pink-100 to-gold-100 border-2 border-dashed border-pink-200">
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-pink-400">
-                    <Camera size={40} className="mb-2 opacity-50" />
-                    <p className="text-sm font-medium">{item.alt}</p>
-                    {item.caption && <p className="text-xs text-pink-300 mt-1">{item.caption}</p>}
-                  </div>
+                <div className="relative overflow-hidden rounded-2xl aspect-square">
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    style={{
+                      objectPosition: item.crop === 'top' ? 'top center' : 'center',
+                    }}
+                    loading="lazy"
+                  />
 
                   {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-end p-4">
-                    <span className="text-white font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-end p-4">
+                    <span className="text-white font-medium opacity-0 group-hover:opacity-100 transition-opacity text-sm drop-shadow-lg">
                       {item.caption}
                     </span>
                   </div>
@@ -107,7 +111,7 @@ export default function Gallery() {
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
                 exit={{ scale: 0.9 }}
-                className="bg-white rounded-3xl p-8 max-w-lg w-full"
+                className="bg-white rounded-3xl p-4 md:p-6 max-w-2xl w-full"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="flex justify-between items-center mb-4">
@@ -119,13 +123,19 @@ export default function Gallery() {
                     <X size={20} />
                   </button>
                 </div>
-                <div className="aspect-square bg-gradient-to-br from-pink-100 to-gold-100 rounded-2xl flex items-center justify-center border-2 border-dashed border-pink-200">
-                  <div className="text-center text-pink-400">
-                    <Camera size={64} className="mx-auto mb-3" />
-                    <p className="font-medium">Photo placeholder</p>
-                    <p className="text-sm text-pink-300">Replace with actual photo</p>
-                  </div>
+                <div className="rounded-2xl overflow-hidden">
+                  <img
+                    src={filtered[selectedPhoto]?.src}
+                    alt={filtered[selectedPhoto]?.alt}
+                    className="w-full h-auto max-h-[70vh] object-contain"
+                    style={{
+                      objectPosition: filtered[selectedPhoto]?.crop === 'top' ? 'top center' : 'center',
+                    }}
+                  />
                 </div>
+                {filtered[selectedPhoto]?.alt && (
+                  <p className="text-center text-gray-500 text-sm mt-3">{filtered[selectedPhoto]?.alt}</p>
+                )}
               </motion.div>
             </motion.div>
           )}

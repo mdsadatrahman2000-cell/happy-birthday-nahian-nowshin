@@ -18,9 +18,9 @@ export const twins: Twin[] = [
     color: '#ff6b9d',
     emoji: '🌸',
     photos: [
-      { src: '/photos/nahian-1.jpg', alt: 'Nahian smiling' },
-      { src: '/photos/nahian-2.jpg', alt: 'Nahian with sister' },
-      { src: '/photos/nahian-3.jpg', alt: 'Nahian candid' },
+      { src: '/photos/nahian/nahian-1.jpg', alt: 'Nahian portrait', crop: 'top' },
+      { src: '/photos/nahian/nahian-2.jpg', alt: 'Nahian in yellow' },
+      { src: '/photos/nahian/nahian-3.jpg', alt: 'Nahian candid' },
     ],
   },
   {
@@ -36,9 +36,9 @@ export const twins: Twin[] = [
     color: '#d4af37',
     emoji: '✨',
     photos: [
-      { src: '/photos/nowshin-1.jpg', alt: 'Nowshin smiling' },
-      { src: '/photos/nowshin-2.jpg', alt: 'Nowshin with sister' },
-      { src: '/photos/nowshin-3.jpg', alt: 'Nowshin candid' },
+      { src: '/photos/nowshin/nowshin-1.jpg', alt: 'Nowshin portrait', crop: 'top' },
+      { src: '/photos/nowshin/nowshin-2.jpg', alt: 'Nowshin in yellow' },
+      { src: '/photos/nowshin/nowshin-3.jpg', alt: 'Nowshin candid' },
     ],
   },
 ]
@@ -103,13 +103,17 @@ export const timelineEvents: TimelineEvent[] = [
 ]
 
 export const galleryItems: GalleryItem[] = [
-  { src: '/photos/together-1.jpg', alt: 'Twin sisters together', caption: 'Our first photo together', twin: 'both' },
-  { src: '/photos/nahian-1.jpg', alt: 'Nahian portrait', caption: 'Nahian being Nahian', twin: 'nahian' },
-  { src: '/photos/nowshin-1.jpg', alt: 'Nowshin portrait', caption: 'Nowshin being Nowshin', twin: 'nowshin' },
-  { src: '/photos/together-2.jpg', alt: 'Twin sisters laughing', caption: 'Laughing together', twin: 'both' },
-  { src: '/photos/nahian-2.jpg', alt: 'Nahian candid', caption: 'Candid Nahian', twin: 'nahian' },
-  { src: '/photos/nowshin-2.jpg', alt: 'Nowshin candid', caption: 'Candid Nowshin', twin: 'nowshin' },
-  { src: '/photos/together-3.jpg', alt: 'Twin sisters at celebration', caption: 'Celebrating life', twin: 'both' },
-  { src: '/photos/nahian-3.jpg', alt: 'Nahian smiling', caption: 'That smile', twin: 'nahian' },
-  { src: '/photos/nowshin-3.jpg', alt: 'Nowshin smiling', caption: 'Pure joy', twin: 'nowshin' },
+  { src: '/photos/together/twins-4.jpg', alt: 'Twin sisters collage', caption: 'Happy Birthday Twinss', twin: 'both' },
+  { src: '/photos/together/twins-2.jpg', alt: 'Happy Birthday BuBu', caption: 'Happy Birthday BuBu', twin: 'both' },
+  { src: '/photos/together/twins-1.jpg', alt: 'Birthday wishes', caption: 'The girl who made my life easy', twin: 'both' },
+  { src: '/photos/together/twins-3.jpg', alt: 'Happy Birthday Twins with friend', caption: 'Happy Birthday Twins', twin: 'both' },
+  { src: '/photos/nahian/nahian-1.jpg', alt: 'Nahian portrait', caption: 'Nahian being Nahian', twin: 'nahian', crop: 'top' },
+  { src: '/photos/nahian/nahian-2.jpg', alt: 'Nahian in yellow', caption: 'Nahian looking beautiful', twin: 'nahian' },
+  { src: '/photos/nahian/nahian-3.jpg', alt: 'Nahian candid', caption: 'Candid Nahian', twin: 'nahian' },
+  { src: '/photos/nowshin/nowshin-1.jpg', alt: 'Nowshin portrait', caption: 'Nowshin being Nowshin', twin: 'nowshin', crop: 'top' },
+  { src: '/photos/nowshin/nowshin-2.jpg', alt: 'Nowshin in yellow', caption: 'Nowshin looking beautiful', twin: 'nowshin' },
+  { src: '/photos/nowshin/nowshin-3.jpg', alt: 'Nowshin candid', caption: 'Candid Nowshin', twin: 'nowshin' },
+  { src: '/photos/friends/friends-1.jpg', alt: 'School selfie with friends', caption: 'School days with friends', twin: 'both' },
+  { src: '/photos/friends/friends-2.jpg', alt: 'School group outdoors', caption: 'Friends forever', twin: 'both' },
+  { src: '/photos/friends/friends-3.jpg', alt: 'Friends group indoors', caption: 'Whole Heart!', twin: 'both' },
 ]

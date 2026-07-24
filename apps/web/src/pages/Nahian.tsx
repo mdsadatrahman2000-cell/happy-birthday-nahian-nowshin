@@ -110,13 +110,17 @@ export default function Nahian() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 + i * 0.1 }}
-                className="bg-gradient-to-br from-pink-100 to-pink-200 rounded-2xl aspect-square flex items-center justify-center border-2 border-dashed border-pink-300"
+                className="rounded-2xl overflow-hidden shadow-lg border-2 border-pink-200 aspect-square"
               >
-                <div className="text-center text-pink-400">
-                  <Camera size={48} className="mx-auto mb-2" />
-                  <p className="text-sm">{photo.alt}</p>
-                  <p className="text-xs text-pink-300 mt-1">Add photo here</p>
-                </div>
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="w-full h-full object-cover"
+                  style={{
+                    objectPosition: photo.crop === 'top' ? 'top center' : 'center',
+                  }}
+                  loading="lazy"
+                />
               </motion.div>
             ))}
           </div>

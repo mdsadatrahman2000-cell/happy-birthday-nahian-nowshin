@@ -66,11 +66,25 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="text-lg text-gray-500 flex items-center justify-center gap-2 mb-12"
+          className="text-lg text-gray-500 flex items-center justify-center gap-2 mb-8"
         >
           Two hearts, one soul, endless love
           <Heart className="text-pink-500 fill-pink-500" size={20} />
         </motion.p>
+
+        {/* Featured Photo */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6 }}
+          className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white mb-12"
+        >
+          <img
+            src="/photos/together/twins-4.jpg"
+            alt="Nahian and Nowshin - Happy Birthday Twins"
+            className="w-full h-auto object-cover"
+          />
+        </motion.div>
 
         {/* Countdown Timer */}
         <motion.div
@@ -102,13 +116,21 @@ export default function Home() {
           <Link to="/nahian">
             <motion.div
               whileHover={{ scale: 1.02, y: -5 }}
-              className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-3xl p-8 border border-pink-200 shadow-lg cursor-pointer"
+              className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-3xl overflow-hidden border border-pink-200 shadow-lg cursor-pointer"
             >
-              <div className="text-5xl mb-4">🌸</div>
-              <h3 className="font-display text-2xl font-semibold text-pink-700 mb-2">Nahian</h3>
-              <p className="font-display text-lg text-pink-600 mb-4">নাহিয়ান</p>
-              <div className="flex items-center gap-2 text-pink-500 font-medium">
-                View Page <ArrowRight size={18} />
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src="/photos/nahian/nahian-2.jpg"
+                  alt="Nahian"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="font-display text-2xl font-semibold text-pink-700 mb-1">Nahian</h3>
+                <p className="font-display text-lg text-pink-600 mb-3">নাহিয়ান</p>
+                <div className="flex items-center gap-2 text-pink-500 font-medium">
+                  View Page <ArrowRight size={18} />
+                </div>
               </div>
             </motion.div>
           </Link>
@@ -116,13 +138,21 @@ export default function Home() {
           <Link to="/nowshin">
             <motion.div
               whileHover={{ scale: 1.02, y: -5 }}
-              className="bg-gradient-to-br from-gold-50 to-gold-100 rounded-3xl p-8 border border-gold-200 shadow-lg cursor-pointer"
+              className="bg-gradient-to-br from-gold-50 to-gold-100 rounded-3xl overflow-hidden border border-gold-200 shadow-lg cursor-pointer"
             >
-              <div className="text-5xl mb-4">✨</div>
-              <h3 className="font-display text-2xl font-semibold text-gold-700 mb-2">Nowshin</h3>
-              <p className="font-display text-lg text-gold-600 mb-4">নাউশিন</p>
-              <div className="flex items-center gap-2 text-gold-500 font-medium">
-                View Page <ArrowRight size={18} />
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src="/photos/nowshin/nowshin-2.jpg"
+                  alt="Nowshin"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="font-display text-2xl font-semibold text-gold-700 mb-1">Nowshin</h3>
+                <p className="font-display text-lg text-gold-600 mb-3">নাউশিন</p>
+                <div className="flex items-center gap-2 text-gold-500 font-medium">
+                  View Page <ArrowRight size={18} />
+                </div>
               </div>
             </motion.div>
           </Link>
