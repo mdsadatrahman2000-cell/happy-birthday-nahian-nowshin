@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Home, User, Image, Clock, Gift } from 'lucide-react'
+import { Home, User, Image, Clock, Gift, Layers } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const navItems = [
@@ -8,6 +8,7 @@ const navItems = [
   { path: '/nowshin', label: 'Nowshin', icon: User },
   { path: '/gallery', label: 'Gallery', icon: Image },
   { path: '/timeline', label: 'Timeline', icon: Clock },
+  { path: '/cards', label: 'Cards', icon: Layers },
   { path: '/card', label: 'Card', icon: Gift },
 ]
 

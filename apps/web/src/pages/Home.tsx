@@ -163,7 +163,8 @@ export default function Home() {
           {[
             { to: '/gallery', label: '📸 Gallery', color: 'bg-pink-100 text-pink-700 hover:bg-pink-200' },
             { to: '/timeline', label: '⏳ Timeline', color: 'bg-gold-100 text-gold-700 hover:bg-gold-200' },
-            { to: '/card', label: '🎁 Birthday Card', color: 'bg-purple-100 text-purple-700 hover:bg-purple-200' },
+            { to: '/cards', label: '🃏 100 Wishes', color: 'bg-purple-100 text-purple-700 hover:bg-purple-200' },
+            { to: '/card', label: '🎁 Birthday Card', color: 'bg-red-100 text-red-700 hover:bg-red-200' },
           ].map((link) => (
             <Link
               key={link.to}

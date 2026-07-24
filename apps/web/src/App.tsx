@@ -6,6 +6,7 @@ import Nowshin from './pages/Nowshin'
 import Gallery from './pages/Gallery'
 import Timeline from './pages/Timeline'
 import BirthdayCard from './pages/BirthdayCard'
+import CardCollection from './pages/CardCollection'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="gallery" element={<Gallery />} />
         <Route path="timeline" element={<Timeline />} />
         <Route path="card" element={<BirthdayCard />} />
+        <Route path="cards" element={<CardCollection />} />
       </Route>
     </Routes>
   )
