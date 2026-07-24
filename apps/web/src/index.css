@@ -16,6 +16,11 @@ body {
   overflow-x: hidden;
 }
 
+.dark body {
+  background-color: #030712;
+  color: #e5e7eb;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Playfair Display', serif;
 }
@@ -31,6 +36,10 @@ h1, h2, h3, h4, h5, h6 {
 
 ::-webkit-scrollbar-track {
   background: #fef1f6;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
 }
 
 ::-webkit-scrollbar-thumb {
