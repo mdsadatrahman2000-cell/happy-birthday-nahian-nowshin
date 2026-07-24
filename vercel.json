@@ -1,3 +1,6 @@
 {
+  "buildCommand": "pnpm turbo build --filter=@nahian-birthday/web",
+  "outputDirectory": "apps/web/dist",
+  "installCommand": "pnpm install",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
