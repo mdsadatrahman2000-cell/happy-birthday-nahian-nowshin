@@ -1,10 +1,49 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Lock, Unlock, X, Sparkles } from 'lucide-react'
-import { birthdayWishes } from '@nahian-birthday/shared'
+import { Lock, Unlock, X, Sparkles, Clock } from 'lucide-react'
+import { birthdayWishes, BIRTHDAY_DATE } from '@nahian-birthday/shared'
 import { useLanguage } from '../contexts/LanguageContext'
 
 const CURRENT_AGE = 20
+const BIRTHDAY = new Date(BIRTHDAY_DATE)
+
+function getTimeUntilUnlock(targetAge: number) {
+  const now = new Date()
+  const unlockYear = BIRTHDAY.getFullYear() + targetAge
+  const unlockDate = new Date(unlockYear, BIRTHDAY.getMonth(), BIRTHDAY.getDate())
+
+  if (now >= unlockDate) return null
+
+  const diff = unlockDate.getTime() - now.getTime()
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+  const months = Math.floor(days / 30)
+  const remainingDays = days % 30
+
+  return { months, days: remainingDays, totalDays: days }
+}
+
+function CountdownBadge({ targetAge }: { targetAge: number }) {
+  const [time, setTime] = useState(() => getTimeUntilUnlock(targetAge))
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(getTimeUntilUnlock(targetAge)), 60000)
+    return () => clearInterval(timer)
+  }, [targetAge])
+
+  if (!time) return null
+
+  return (
+    <div className="absolute bottom-1.5 left-1.5 right-1.5 bg-black/40 backdrop-blur-sm rounded-lg px-1.5 py-1 text-center">
+      <div className="flex items-center justify-center gap-1">
+        <Clock size={9} className="text-white/70" />
+        <span className="text-[9px] text-white/90 font-medium leading-tight">
+          {time.months > 0 && `${time.months}m `}
+          {time.days}d
+        </span>
+      </div>
+    </div>
+  )
+}
 
 export default function CardCollection() {
   const [selectedCard, setSelectedCard] = useState<number | null>(null)
@@ -34,10 +73,13 @@ export default function CardCollection() {
               {t('100 Birthday Wishes', '১০০টি জন্মদিনের শুভেচ্ছা')}
             </span>
           </h1>
-          <p className="font-display text-xl text-gray-600 dark:text-gray-400 mb-2">১০০টি জন্মদিনের শুভেচ্ছা</p>
+          <p className="font-display text-xl text-gray-600 dark:text-gray-400 mb-2">
+            {t('Each card unlocks on the corresponding birthday.', 'প্রতিটি কার্ড সংশ্লিষ্ট জন্মদিনে আনলক হয়।')}
+          </p>
           <p className="text-gray-500 dark:text-gray-400 mb-6">
-            {t('Each card unlocks on the corresponding birthday.', 'প্রতিটি কার্ড সংশ্লিষ্ট জন্মদিনে আনলক হয়।')}{' '}
-            <span className="text-pink-500 font-semibold">{unlockedCount}/101 {t('unlocked', 'আনলক')}</span>
+            <span className="text-pink-500 font-semibold">
+              {unlockedCount}/101 {t('unlocked', 'আনলক')}
+            </span>
           </p>
 
           <div className="max-w-md mx-auto bg-gray-200 dark:bg-gray-800 rounded-full h-3 mb-8 overflow-hidden">
@@ -70,6 +112,7 @@ export default function CardCollection() {
           </div>
         </motion.div>
 
+        {/* Cards Grid */}
         <motion.div layout className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 md:gap-4">
           {filtered.map((wish, i) => {
             const unlocked = isUnlocked(wish.age)
@@ -83,25 +126,54 @@ export default function CardCollection() {
                 transition={{ delay: Math.min(i * 0.02, 0.5) }}
                 onClick={() => unlocked && setSelectedCard(wish.age)}
                 className={`relative aspect-[3/4] rounded-2xl cursor-pointer transition-all duration-300 overflow-hidden ${
-                  unlocked ? 'hover:scale-105 hover:shadow-xl hover:-translate-y-1' : 'cursor-default'
+                  unlocked
+                    ? 'hover:scale-105 hover:shadow-xl hover:-translate-y-1'
+                    : 'cursor-default'
                 }`}
               >
-                <div className={`absolute inset-0 ${unlocked ? 'bg-gradient-to-br from-pink-400 via-pink-500 to-gold-400' : 'bg-gradient-to-br from-gray-300 dark:from-gray-700 via-gray-400 dark:via-gray-600 to-gray-500 dark:to-gray-500'}`} />
+                {/* Card background */}
+                <div
+                  className={`absolute inset-0 ${
+                    unlocked
+                      ? 'bg-gradient-to-br from-pink-400 via-pink-500 to-gold-400'
+                      : 'bg-gradient-to-br from-gray-300 dark:from-gray-700 via-gray-400 dark:via-gray-600 to-gray-500 dark:to-gray-500'
+                  }`}
+                />
+
+                {/* Decorative circles */}
                 <div className="absolute inset-0 opacity-20">
                   <div className="absolute top-2 right-2 w-6 h-6 rounded-full border-2 border-white/40" />
                   <div className="absolute bottom-3 left-2 w-4 h-4 rounded-full border-2 border-white/30" />
                 </div>
+
+                {/* Content */}
                 <div className="relative h-full flex flex-col items-center justify-center p-3 text-white text-center">
                   <span className="text-2xl md:text-3xl mb-1">{wish.emoji}</span>
                   <span className="text-xl md:text-2xl font-bold">{wish.age}</span>
-                  {unlocked ? <Unlock size={14} className="absolute top-2 right-2 opacity-60" /> : <Lock size={14} className="absolute top-2 right-2 opacity-60" />}
+                  <span className="text-[9px] opacity-70 mt-0.5">
+                    {wish.age === 0 ? 'Year' : 'Years'}
+                  </span>
+
+                  {unlocked ? (
+                    <Unlock size={14} className="absolute top-2 right-2 opacity-60" />
+                  ) : (
+                    <Lock size={14} className="absolute top-2 right-2 opacity-60" />
+                  )}
                 </div>
-                {unlocked && <div className="absolute inset-0 bg-white/0 hover:bg-white/10 transition-colors" />}
+
+                {/* Countdown for locked cards */}
+                {!unlocked && <CountdownBadge targetAge={wish.age} />}
+
+                {/* Hover glow for unlocked */}
+                {unlocked && (
+                  <div className="absolute inset-0 bg-white/0 hover:bg-white/10 transition-colors" />
+                )}
               </motion.div>
             )
           })}
         </motion.div>
 
+        {/* Detail Modal */}
         <AnimatePresence>
           {selectedCard !== null && (
             <motion.div
@@ -120,21 +192,43 @@ export default function CardCollection() {
                 className="relative w-full max-w-md"
               >
                 <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden">
+                  {/* Card header */}
                   <div className="bg-gradient-to-r from-pink-400 via-pink-500 to-gold-400 p-8 text-center relative">
                     <div className="absolute inset-0 opacity-10">
                       {Array.from({ length: 15 }).map((_, j) => (
-                        <div key={j} className="absolute animate-float" style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`, animationDelay: `${Math.random() * 3}s` }}>
+                        <div
+                          key={j}
+                          className="absolute animate-float"
+                          style={{
+                            left: `${Math.random() * 100}%`,
+                            top: `${Math.random() * 100}%`,
+                            animationDelay: `${Math.random() * 3}s`,
+                          }}
+                        >
                           <Sparkles size={12} className="text-white" />
                         </div>
                       ))}
                     </div>
-                    <button onClick={() => setSelectedCard(null)} className="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors text-white">
+                    <button
+                      onClick={() => setSelectedCard(null)}
+                      className="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors text-white"
+                    >
                       <X size={18} />
                     </button>
-                    <span className="text-5xl mb-3 block relative z-10">{birthdayWishes.find((w) => w.age === selectedCard)?.emoji}</span>
-                    <h2 className="font-display text-3xl font-bold text-white relative z-10">Age {selectedCard}</h2>
-                    <p className="text-white/80 text-sm relative z-10 mt-1">{selectedCard === 0 ? t('Year Zero', 'শূন্য বছর') : `${selectedCard} ${t('Years', 'বছর')}`}</p>
+                    <span className="text-5xl mb-3 block relative z-10">
+                      {birthdayWishes.find((w) => w.age === selectedCard)?.emoji}
+                    </span>
+                    <h2 className="font-display text-3xl font-bold text-white relative z-10">
+                      {t('Age', 'বয়স')} {selectedCard}
+                    </h2>
+                    <p className="text-white/80 text-sm relative z-10 mt-1">
+                      {selectedCard === 0
+                        ? t('Year Zero', 'শূন্য বছর')
+                        : `${selectedCard} ${t('Years', 'বছর')}`}
+                    </p>
                   </div>
+
+                  {/* Card body */}
                   <div className="p-8">
                     <p className="text-lg text-gray-700 dark:text-gray-300 text-center leading-relaxed mb-4">
                       {birthdayWishes.find((w) => w.age === selectedCard)?.wish}

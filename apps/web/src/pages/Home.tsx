@@ -62,11 +62,26 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="text-lg text-gray-500 dark:text-gray-400 flex items-center justify-center gap-2 mb-8"
+          className="text-lg text-gray-500 dark:text-gray-400 flex items-center justify-center gap-2 mb-4"
         >
           {t('Two hearts, one soul, endless love', 'দুইটি হৃদয়, একটি আত্মা, অসীম ভালোবাসা')}
           <Heart className="text-pink-500 fill-pink-500" size={20} />
         </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          className="inline-flex items-center gap-3 bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm rounded-full px-6 py-3 shadow-md border border-pink-100 dark:border-gray-800 mb-8"
+        >
+          <span className="text-2xl">📅</span>
+          <div className="text-left">
+            <p className="text-sm text-gray-500 dark:text-gray-400">{t('Born on', 'জন্ম তারিখ')}</p>
+            <p className="font-display text-lg font-semibold text-gray-800 dark:text-gray-100">
+              {t('July 23, 2006', '২৩ জুলাই, ২০০৬')}
+            </p>
+          </div>
+        </motion.div>
 
         {/* Featured Photo */}
         <motion.div
